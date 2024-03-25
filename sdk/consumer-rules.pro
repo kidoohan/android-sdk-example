@@ -1,0 +1,2 @@
+-dontwarn com.example.sdk.**
+-keep class com.example.sdk.** { *; }

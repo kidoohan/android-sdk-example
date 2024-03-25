@@ -1,0 +1,40 @@
+{
+  "bidId": "JF-Yf2j_h6u7pxfI5vLrhi0AAAGM8yx6GAUAAA-qAgBhcHNfdHhuX2JpZDEgICBhcHNfdHhuX2ltcDEgICDnnKel",
+  "crid": "74_13287986",
+  "hostName": "aax.amazon-adsystem.com",
+  "impressionUrl": "https://aax-fe-sin.amazon-adsystem.com/e/msdk/imp?b\u003dJF-Yf2j_h6u7pxfI5vLrhi0AAAGM8yx6GAUAAA-qAgBhcHNfdHhuX2JpZDEgICBhcHNfdHhuX2ltcDEgICDnnKel\u0026ps\u003dob0agw",
+  "isVideo": false,
+  "kvpDictionary": {
+    "dc": [
+      "sin"
+    ],
+    "amznp": [
+      "1gtckjk"
+    ],
+    "amznrdr": [
+      "default"
+    ]
+  },
+  "pricepoints": [
+    [
+      {
+        "adType": "DISPLAY",
+        "height": 250,
+        "slotUUID": "a688500a-773a-40d2-ba80-fe955811604d",
+        "width": 300
+      },
+      [
+        {
+          "adSize": {
+            "adType": "DISPLAY",
+            "height": 250,
+            "slotUUID": "a688500a-773a-40d2-ba80-fe955811604d",
+            "width": 300
+          },
+          "pricePoint": "ob0agw"
+        }
+      ]
+    ]
+  ],
+  "videoSkipAfterDurationInSeconds": 0
+}

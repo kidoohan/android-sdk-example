@@ -1,0 +1,55 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+obj/
+out/
+dist/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+.cxx/
+
+# Android Studio captures folder
+captures/
+
+# VSCode/Eclipse
+.classpath
+.project
+.settings
+
+# Gradle
+.gradle
+build
+**/build
+
+# Local configuration file (sdk path, etc)
+local.properties
+local.gradle
+
+# vim temp files
+*.swp
+
+# Mac OS
+.DS_Store
+
+buildSrc/build/
+
+out.map
