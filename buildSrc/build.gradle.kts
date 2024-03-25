@@ -10,7 +10,7 @@ repositories {
 
 @Suppress(
     "MISSING_DEPENDENCY_CLASS",
-    "UNRESOLVED_REFERENCE_WRONG_RECEIVER"
+    "UNRESOLVED_REFERENCE_WRONG_RECEIVER",
 )
 dependencies {
     implementation(libs.gradlePlugin.android)

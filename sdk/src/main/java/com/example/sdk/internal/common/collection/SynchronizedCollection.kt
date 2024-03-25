@@ -24,7 +24,7 @@ open class SynchronizedCollection<E>
 @JvmOverloads
 constructor(
     private val collection: MutableCollection<E?>,
-    protected val lock: Any = Any()
+    protected val lock: Any = Any(),
 ) : MutableCollection<E?> {
     override val size: Int
         get() {

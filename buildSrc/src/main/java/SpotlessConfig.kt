@@ -28,9 +28,9 @@ fun Project.configureSpotless(ktlintVersion: String) {
                     mapOf(
                         "dir" to ".",
                         "include" to listOf("**/*.md"),
-                        "exclude" to listOf(".gradle/**", ".gradle-cache/**", "build/**")
-                    )
-                )
+                        "exclude" to listOf(".gradle/**", ".gradle-cache/**", "build/**"),
+                    ),
+                ),
             )
 
             indentWithSpaces()
@@ -42,9 +42,9 @@ fun Project.configureSpotless(ktlintVersion: String) {
                     mapOf(
                         "dir" to ".",
                         "include" to listOf("**/.gitignore", "**/*.yaml", "**/*.yml", "**/*.sh"),
-                        "exclude" to listOf("**/*.md", ".gradle/**", ".gradle-cache/**", "build/**")
-                    )
-                )
+                        "exclude" to listOf("**/*.md", ".gradle/**", ".gradle-cache/**", "build/**"),
+                    ),
+                ),
             )
             trimTrailingWhitespace()
             indentWithSpaces()

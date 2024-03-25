@@ -18,7 +18,7 @@ open class SynchronizedQueue<E>
 @JvmOverloads
 constructor(
     queue: Queue<E?>,
-    lock: Any = Any()
+    lock: Any = Any(),
 ) : SynchronizedCollection<E>(queue, lock), Queue<E> {
     /**
      * Gets the queue being decorated.

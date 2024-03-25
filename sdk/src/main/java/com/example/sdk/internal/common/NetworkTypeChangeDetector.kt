@@ -13,6 +13,8 @@ import androidx.annotation.GuardedBy
 import androidx.annotation.RequiresApi
 import com.example.sdk.internal.NetworkType
 import com.example.sdk.internal.Validate
+import com.example.sdk.internal.inspector.EventBreadcrumb
+import com.example.sdk.internal.inspector.InspectorManager
 import java.lang.ref.WeakReference
 import java.util.concurrent.CopyOnWriteArrayList
 
@@ -77,17 +79,16 @@ object NetworkTypeChangeDetector {
             if (this.networkType == networkType) {
                 return
             }
-            // todo
-//            InspectorManager.eventHub.addBreadcrumb(
-//                EventBreadcrumb(
-//                    "network",
-//                    "device.event",
-//                    data = mapOf(
-//                        "oldType" to this@InternalNetworkTypeChangeDetector.networkType.detailedName,
-//                        "newType" to networkType.detailedName
-//                    )
-//                )
-//            )
+            InspectorManager.eventHub.addBreadcrumb(
+                EventBreadcrumb(
+                    "network",
+                    "device.event",
+                    data = mapOf(
+                        "oldType" to this@NetworkTypeChangeDetector.networkType.detailedName,
+                        "newType" to networkType.detailedName,
+                    ),
+                ),
+            )
             this.networkType = networkType
         }
 

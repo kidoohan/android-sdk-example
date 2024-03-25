@@ -8,6 +8,8 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
+
+@Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
@@ -18,7 +20,7 @@ dependencyResolutionManagement {
 
 // public modules
 include(
-    "sdk"
+    "sdk",
 )
 
 // private modules
@@ -26,5 +28,5 @@ include(
     "sdk-sample",
     "sdk-testdata",
     "sdk-testutils",
-    "sdk-robolectricutils"
+    "sdk-robolectricutils",
 )

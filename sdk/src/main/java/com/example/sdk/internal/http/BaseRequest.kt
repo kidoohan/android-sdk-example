@@ -9,4 +9,4 @@ import com.google.android.gms.tasks.CancellationToken
  */
 abstract class BaseRequest protected constructor(
     protected open val cancellationToken: CancellationToken?,
-) : Request 
+) : Request

@@ -13,6 +13,7 @@ import com.example.sdk.internal.inspector.crashevent.CrashEventCall
 import com.example.sdk.internal.inspector.crashevent.getStringCause
 import com.example.sdk.internal.inspector.crashevent.getStringStackTrace
 import com.example.sdk.internal.inspector.crashevent.isSdkRelated
+import com.example.sdk.internal.inspector.deviceevent.SystemEventsCrawler
 import com.example.sdk.internal.inspector.lifecycleevent.ActivityLifecycleCrawler
 import com.example.sdk.internal.inspector.lifecycleevent.FragmentLifecycleCrawler
 import com.example.sdk.internal.persistence.Flags
@@ -45,7 +46,7 @@ object InspectorManager {
                 CRASH_EVENT_REMAINED_TIME_SECONDS,
             ).forEach { file ->
                 CrashEvent.fromFile(file)?.let { crashEvent ->
-                    // todo
+                    reportCrashEvent(crashEvent)
                 }
             }
 
@@ -56,6 +57,7 @@ object InspectorManager {
                 }
             }
             eventCrawlers.add(CrashCrawler())
+            eventCrawlers.add(SystemEventsCrawler(context))
         }
     }
 

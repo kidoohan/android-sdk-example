@@ -12,13 +12,13 @@ fun Project.configureBinaryCompatibility() {
             listOf(
                 "sdk-robolectricutils",
                 "sdk-sample",
-                "sdk-testutils"
-            )
+                "sdk-testutils",
+            ),
         )
         ignoredClasses.addAll(
             listOf(
-                "com.example.sdk.BuildConfig"
-            )
+                "com.example.sdk.BuildConfig",
+            ),
         )
     }
 }

@@ -7,7 +7,7 @@ class StringFlag(
     key: String,
     defaultValue: String,
     @GetType getType: Int,
-    @PutType putType: Int
+    @PutType putType: Int,
 ) : Flags.Flag<String>(key, defaultValue, getType, putType) {
     override fun internalPutValue(sharedPreferences: SharedPreferences, value: String) {
         sharedPreferences.edit().putString(key, value).apply()

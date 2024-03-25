@@ -8,5 +8,5 @@ import java.lang.RuntimeException
  * @constructor Constructs a new [UnmarshallException] instance.
  */
 class UnmarshallException(
-    th: Throwable
+    th: Throwable,
 ) : RuntimeException(th)

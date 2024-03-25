@@ -26,7 +26,7 @@ import java.util.Queue
 class CircularFifoQueue<E>
 @JvmOverloads
 constructor(
-    size: Int = 32
+    size: Int = 32,
 ) : AbstractMutableCollection<E?>(), Queue<E?>, Serializable {
     init {
         Validate.checkGreaterThan(size, 0, "The size must be greater than 0.")

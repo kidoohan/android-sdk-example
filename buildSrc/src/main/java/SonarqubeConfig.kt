@@ -19,19 +19,19 @@ fun Project.configureSonarQube() {
                     "sdk-testdata/**/*",
                     "sdk-testutils/**/*",
                     "sdk-robolectricutils/**/*",
-                    "**/mraid.js"
-                ).joinToString(separator = ", ")
+                    "**/mraid.js",
+                ).joinToString(separator = ", "),
             )
             property(
                 "sonar.junit.reportPaths",
                 arrayOf(
                     "build/test-results/testDebugUnitTest",
-                    "build/outputs/androidTest-results/connected"
-                ).joinToString(separator = ", ")
+                    "build/outputs/androidTest-results/connected",
+                ).joinToString(separator = ", "),
             )
             property(
                 "sonar.coverage.jacoco.xmlReportPaths",
-                file("${rootProject.buildDir}/reports/jacoco/jacocoFullReport/jacocoFullReport.xml")
+                file("${rootProject.buildDir}/reports/jacoco/jacocoFullReport/jacocoFullReport.xml"),
             )
         }
     }

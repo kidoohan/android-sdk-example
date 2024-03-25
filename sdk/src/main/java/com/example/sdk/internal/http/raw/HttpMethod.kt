@@ -6,5 +6,5 @@ enum class HttpMethod {
     GET,
 
     /** use HTTP method `POST` for the request */
-    POST
+    POST,
 }

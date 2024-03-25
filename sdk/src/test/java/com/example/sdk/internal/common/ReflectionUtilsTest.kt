@@ -1,9 +1,9 @@
 package com.example.sdk.internal.common
 
 import com.google.common.truth.Truth.assertThat
+import org.junit.Assert.assertThrows
 import org.junit.Test
 import java.lang.IllegalStateException
-import org.junit.Assert.assertThrows
 
 /** Tests for [ReflectionUtils]  */
 class ReflectionUtilsTest {

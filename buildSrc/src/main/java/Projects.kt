@@ -15,7 +15,7 @@ import java.io.File
 
 data class QualityConfig(
     val jacocoToolVersion: String,
-    val androidTest: Boolean = false
+    val androidTest: Boolean = false,
 )
 
 fun Project.configureBomModule() {
@@ -34,7 +34,7 @@ fun Project.configureLibraryModule(
     publish: Boolean = false,
     document: Boolean = false,
     qualityConfig: QualityConfig? = null,
-    block: LibraryExtension.() -> Unit = {}
+    block: LibraryExtension.() -> Unit = {},
 ) = configureBaseModule<LibraryExtension> {
     qualityConfig?.run {
         configureSubProjectJacoco(jacocoToolVersion, androidTest)
@@ -92,7 +92,7 @@ fun Project.configureLibraryModule(
 
 fun Project.configureAppModule(
     qualityConfig: QualityConfig? = null,
-    block: BaseAppModuleExtension.() -> Unit = {}
+    block: BaseAppModuleExtension.() -> Unit = {},
 ) = configureBaseModule<BaseAppModuleExtension> {
     qualityConfig?.run {
         configureSubProjectJacoco(jacocoToolVersion, androidTest)
@@ -112,7 +112,7 @@ fun Project.configureAppModule(
 }
 
 private inline fun <reified T : BaseExtension> Project.configureBaseModule(
-    crossinline block: T.() -> Unit = {}
+    crossinline block: T.() -> Unit = {},
 ) = extensions.configure<T>("android") {
     compileSdkVersion(project.compileSdk)
     defaultConfig {

@@ -10,5 +10,5 @@ import java.lang.RuntimeException
  * @property statusCode the HTTP response status code.
  */
 class RequestException(
-    val statusCode: Int
+    val statusCode: Int,
 ) : RuntimeException()

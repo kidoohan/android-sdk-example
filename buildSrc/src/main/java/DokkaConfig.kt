@@ -24,8 +24,8 @@ fun Project.configureDokka() {
             documentedVisibilities.set(
                 setOf(
                     DokkaConfiguration.Visibility.PUBLIC,
-                    DokkaConfiguration.Visibility.PROTECTED
-                )
+                    DokkaConfiguration.Visibility.PROTECTED,
+                ),
             )
 
             noAndroidSdkLink.set(false)

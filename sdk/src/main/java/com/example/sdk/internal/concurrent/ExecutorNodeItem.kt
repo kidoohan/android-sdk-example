@@ -8,7 +8,7 @@ import com.google.android.gms.tasks.CancellationToken
  * @property cancellationToken the cancellationToken to cancel this item.
  */
 open class ExecutorNodeItem(
-    open val cancellationToken: CancellationToken?
+    open val cancellationToken: CancellationToken?,
 ) {
     /** Returns true if and only if this Cancellable has been successfully cancelled. */
     fun isCancellationRequest(): Boolean {

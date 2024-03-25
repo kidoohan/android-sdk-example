@@ -12,7 +12,7 @@ import org.gradle.testing.jacoco.tasks.JacocoReport
 
 fun Project.configureSubProjectJacoco(
     jacocoToolVersion: String,
-    androidTest: Boolean = false
+    androidTest: Boolean = false,
 ) {
     apply<JacocoPlugin>()
     configure<JacocoPluginExtension> {
@@ -34,7 +34,7 @@ fun Project.configureSubProjectJacoco(
         sourceDirectories.setFrom("$projectDir/src/main/java")
         classDirectories.setFrom(
             fileTree("$buildDir/intermediates/javac/debug"),
-            fileTree("$buildDir/tmp/kotlin-classes/debug")
+            fileTree("$buildDir/tmp/kotlin-classes/debug"),
         )
         executionData.setFrom(
             fileTree(buildDir) {
@@ -43,10 +43,10 @@ fun Project.configureSubProjectJacoco(
                         // Unit test coverage report location
                         "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
                         // Instrumentation coverage report location
-                        "outputs/code_coverage/debugAndroidTest/connected/**/*.ec"
-                    )
+                        "outputs/code_coverage/debugAndroidTest/connected/**/*.ec",
+                    ),
                 )
-            }
+            },
         )
     }
 

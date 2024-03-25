@@ -14,7 +14,7 @@ import com.example.sdk.internal.http.raw.HttpResponse
  */
 data class Response<T>(
     val body: T,
-    val rawResponse: HttpResponse
+    val rawResponse: HttpResponse,
 ) {
     /** HTTP status code */
     val statusCode: Int = rawResponse.statusCode

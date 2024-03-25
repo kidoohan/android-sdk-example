@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class HttpHeader(
     val name: String,
-    var value: String?
+    var value: String?,
 ) : Parcelable {
     /**
      * Get the comma separated value as an array.
@@ -34,4 +34,3 @@ data class HttpHeader(
         }
     }
 }
-
