@@ -3,6 +3,8 @@ package com.example.sdk.internal.http.raw
 import android.net.Uri
 import com.example.sdk.internal.concurrent.CallableExecutorNode
 import com.example.sdk.internal.concurrent.ExecutorNodeQueue
+import com.example.sdk.internal.inspector.EventBreadcrumb
+import com.example.sdk.internal.inspector.InspectorManager
 import java.io.ByteArrayInputStream
 import java.io.FilterInputStream
 import java.io.IOException
@@ -21,6 +23,14 @@ constructor(
 
     override fun apply(): HttpResponse {
         val requestProperties = request.properties
+        InspectorManager.eventHub.addBreadcrumb(
+            EventBreadcrumb(
+                type = "network",
+                category = "http.request",
+                data = requestProperties.toMap(),
+            ),
+        )
+
         return runCatching {
             createHttpResponse(makeConnection(requestProperties), requestProperties)
         }.getOrElse { exception ->
@@ -30,10 +40,34 @@ constructor(
     }
 
     override fun onResponse(response: HttpResponse) {
+        val responseData = mutableMapOf(
+            "statusCode" to response.statusCode,
+            "headers" to response.headers,
+        )
+        if (response is BufferedHttpResponse) {
+            responseData["body"] = response.getBodyAsString()
+        }
+
+        InspectorManager.eventHub.addBreadcrumb(
+            EventBreadcrumb(
+                type = "network",
+                category = "http.response",
+                data = request.properties.toMap() + responseData,
+            ),
+        )
         callback?.onResponse(request, response)
     }
 
     override fun onFailure(exception: Exception) {
+        InspectorManager.eventHub.addBreadcrumb(
+            EventBreadcrumb(
+                type = "network",
+                category = "http.failure",
+                data = runCatching {
+                    request.properties.toMap() + mapOf("errorMessage" to exception.message)
+                }.getOrElse { mapOf("errorMessage" to exception.message) },
+            ),
+        )
         response?.close()
         callback?.onFailure(request, exception)
     }

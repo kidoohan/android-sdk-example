@@ -2,6 +2,7 @@ package com.example.sdk.internal
 
 import android.content.Context
 import com.example.sdk.internal.concurrent.Executors
+import com.example.sdk.internal.inspector.EventBreadcrumb
 import com.example.sdk.internal.inspector.InspectorManager
 import com.example.sdk.internal.persistence.Flags
 import com.google.android.gms.tasks.Task
@@ -53,9 +54,12 @@ object Sdk {
             // enable inspector manager
             InspectorManager.enable(context)
 
-            // todo initialize sdk
             val appCode = Flags.APP_CODE.getValue()
             val userId = Flags.USER_ID.getValue()
+
+            addSdkBreadcrumb("onCreate", mapOf("appCode" to appCode, "userId" to userId))
+
+            // todo initialize sdk
         }
     }
 
@@ -81,5 +85,16 @@ object Sdk {
         } else {
             Tasks.forResult(IdentifierProperties.EMPTY_IDENTIFIER_PROPERTIES)
         }
+    }
+
+    private fun addSdkBreadcrumb(category: String, data: Map<String, Any?>, message: String = "") {
+        InspectorManager.eventHub.addBreadcrumb(
+            EventBreadcrumb(
+                type = "sdk",
+                category = category,
+                data = data,
+                message = message,
+            ),
+        )
     }
 }
