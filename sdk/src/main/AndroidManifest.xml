@@ -8,7 +8,7 @@
     <application>
         <provider
             android:name="com.example.sdk.SdkInitProvider"
-            android:authorities="${applicationId}.SdkExampleInitProvider"
+            android:authorities="${applicationId}.SdkInitProvider"
             android:exported="false" />
     </application>
 
