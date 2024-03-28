@@ -1,4 +1,4 @@
-package com.naver.ads.test
+package com.example.sdk.test
 
 import android.app.Activity
 
