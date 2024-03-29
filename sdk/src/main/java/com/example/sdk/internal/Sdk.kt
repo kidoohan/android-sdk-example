@@ -1,7 +1,6 @@
 package com.example.sdk.internal
 
 import android.content.Context
-import com.example.sdk.internal.concurrent.Executors
 import com.example.sdk.internal.inspector.EventBreadcrumb
 import com.example.sdk.internal.inspector.InspectorManager
 import com.example.sdk.internal.persistence.Flags
@@ -77,7 +76,7 @@ object Sdk {
     internal fun getIdentifierProperties(): Task<IdentifierProperties> {
         return if (enabled.get()) {
             IdentifierProperties.getIdentifierProperties(applicationContext)
-                .addOnCompleteListener(Executors.UI_THREAD_EXECUTOR) {
+                .addOnCompleteListener {
                     if (it.isSuccessful) {
                         cachedIdentifierProperties = it.result
                     }

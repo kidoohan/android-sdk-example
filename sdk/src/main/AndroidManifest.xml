@@ -10,6 +10,7 @@
             android:name="com.example.sdk.SdkInitProvider"
             android:authorities="${applicationId}.SdkInitProvider"
             android:exported="false" />
+
     </application>
 
 </manifest>

@@ -58,6 +58,10 @@ object InspectorManager {
             }
             eventCrawlers.add(CrashCrawler())
             eventCrawlers.add(SystemEventsCrawler(context))
+
+            for (eventCrawler in eventCrawlers) {
+                eventCrawler.register(eventHub)
+            }
         }
     }
 

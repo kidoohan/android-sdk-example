@@ -1,4 +1,4 @@
-package com.example.sdk.internal.visibilitytracker
+package com.example.sdk.internal.visibilityobserver
 
 import android.os.SystemClock
 import androidx.annotation.FloatRange

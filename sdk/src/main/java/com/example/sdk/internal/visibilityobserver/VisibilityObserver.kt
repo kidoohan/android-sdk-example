@@ -1,4 +1,4 @@
-package com.example.sdk.internal.visibilitytracker
+package com.example.sdk.internal.visibilityobserver
 
 import android.graphics.Rect
 import android.os.Handler
@@ -32,7 +32,7 @@ class VisibilityObserver(
                 if (isInBackground != isBackground) {
                     isInBackground = isBackground
                     if (isBackground) {
-                        scheduleViewObserver(false)
+                        scheduleVisibilityObserver(false)
                     } else if (observerState == VisibilityObserverState.WAITING_FOR_FOREGROUND) {
                         observe()
                     }
@@ -54,7 +54,7 @@ class VisibilityObserver(
                     if (isInBackground) {
                         internalUnobserve(true)
                     } else if (observerContexts.isNotEmpty()) {
-                        scheduleViewObserver(true)
+                        scheduleVisibilityObserver(true)
                     }
                 } ?: unsetViewTreeObserver()
             }
@@ -63,7 +63,7 @@ class VisibilityObserver(
     private val onPreDrawListener = ViewTreeObserver.OnPreDrawListener {
         synchronized(lock) {
             if (isObservable()) {
-                scheduleViewObserver(true)
+                scheduleVisibilityObserver(true)
             }
         }
         true
@@ -83,13 +83,13 @@ class VisibilityObserver(
 
                 if (observerContexts.isNotEmpty()) {
                     setViewTreeObserver()
-                    scheduleViewObserver(false)
+                    scheduleVisibilityObserver(false)
                 }
             }
         }
     }
 
-    /** Change the target view set in ViewObserver to given [changedTargetView] and observe given [changedTargetView] */
+    /** Change the target view set in VisibilityObserver to given [changedTargetView] and observe given [changedTargetView] */
     fun observe(changedTargetView: View) {
         synchronized(lock) {
             val originalTargetView = weakTargetView.get()
@@ -196,7 +196,7 @@ class VisibilityObserver(
         }
     }
 
-    private fun scheduleViewObserver(hasDelay: Boolean) {
+    private fun scheduleVisibilityObserver(hasDelay: Boolean) {
         synchronized(lock) {
             if (!scheduled) {
                 scheduled = true
@@ -226,7 +226,7 @@ class VisibilityObserver(
                         viewTreeObserver.addOnPreDrawListener(onPreDrawListener)
                     } ?: SdkLogger.w(
                     LOG_TAG,
-                    "ViewObserver was unable to track views because the root view tree observer was not alive.",
+                    "VisibilityObserver was unable to track views because the root view tree observer was not alive.",
                 )
             } ?: SdkLogger.w(
                 LOG_TAG,

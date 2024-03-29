@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/success"
+    tools:context=".backgrounddetector.BackgroundDetectorFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="Background Detector"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        tools:ignore="HardcodedText,SpUsage" />
+
+    <com.example.sdk.sample.SampleLogsView
+        android:id="@+id/sample_logs_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom" />
+
+</FrameLayout>

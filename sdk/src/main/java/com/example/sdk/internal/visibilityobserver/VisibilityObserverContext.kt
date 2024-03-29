@@ -1,4 +1,4 @@
-package com.example.sdk.internal.visibilitytracker
+package com.example.sdk.internal.visibilityobserver
 
 import androidx.annotation.CallSuper
 

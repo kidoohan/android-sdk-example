@@ -1,4 +1,4 @@
-package com.example.sdk.internal.visibilitytracker
+package com.example.sdk.internal.visibilityobserver
 
 /** Callback to tracking view intersection. */
 fun interface VisibilityObserverCallback {

@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">SdkExample</string>
     <string name="app_code">SDK-12345678</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings for SampleLogsView -->
+    <string name="logs">Logs</string>
+
+    <string name="sample_list_fragment_label">Samples</string>
+    <string name="image_transformation_fragment_label">Image Transformation</string>
+    <string name="background_detector_fragment_label">Background Detector</string>
+    <string name="network_type_change_detector_fragment_label">Network Type Change Detector</string>
+    <string name="visibility_observer_with_list_fragment_label">VisibilityObserver With List</string>
+    <string name="visibility_observer_with_scroll_view_both_direction_fragment_label">VisibilityObserver With ScrollView</string>
+    <string name="io_queue_fragment_label">IO_QUEUE</string>
 </resources>

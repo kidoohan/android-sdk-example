@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".samples.networktypechangedetector.NetworkTypeChangeDetectorFragment">
+
+    <TextView
+        android:id="@+id/current_network_type"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="50dp"
+        android:background="@color/warning"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
+        tools:ignore="HardcodedText,SpUsage"
+        tools:text="foo" />
+
+</FrameLayout>

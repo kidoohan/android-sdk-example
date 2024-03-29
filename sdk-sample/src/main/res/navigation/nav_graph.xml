@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/SampleListFragment">
+
+    <fragment
+        android:id="@+id/SampleListFragment"
+        android:name="com.example.sdk.sample.SampleListFragment"
+        android:label="@string/sample_list_fragment_label"
+        tools:layout="@layout/fragment_sample_item_list">
+
+        <action
+            android:id="@+id/action_SampleListFragment_to_ImageTransformationFragment"
+            app:destination="@+id/ImageTransformationFragment" />
+
+        <action
+            android:id="@+id/action_SampleListFragment_to_BackgroundDetectorFragment"
+            app:destination="@+id/BackgroundDetectorFragment" />
+
+        <action
+            android:id="@+id/action_SampleListFragment_to_NetworkTypeChangeDetectorFragment"
+            app:destination="@+id/NetworkTypeChangeDetectorFragment" />
+
+        <action
+            android:id="@+id/action_SampleListFragment_to_VisibilityObserverWithListFragment"
+            app:destination="@+id/VisibilityObserverWithListFragment" />
+
+        <action
+            android:id="@+id/action_SampleListFragment_to_VisibilityObserverWithScrollViewBothDirectionFragment"
+            app:destination="@+id/VisibilityObserverWithScrollViewBothDirectionFragment" />
+
+        <action
+            android:id="@+id/action_SampleListFragment_to_IoQueueFragment"
+            app:destination="@+id/IoQueueFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/ImageTransformationFragment"
+        android:name="com.example.sdk.sample.image.ImageTransformationFragment"
+        android:label="@string/image_transformation_fragment_label"
+        tools:layout="@layout/fragment_image_transformation">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/BackgroundDetectorFragment"
+        android:name="com.example.sdk.sample.backgrounddetector.BackgroundDetectorFragment"
+        android:label="@string/background_detector_fragment_label"
+        tools:layout="@layout/fragment_background_detector">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/NetworkTypeChangeDetectorFragment"
+        android:name="com.example.sdk.sample.networktypechangedetector.NetworkTypeChangeDetectorFragment"
+        android:label="@string/network_type_change_detector_fragment_label"
+        tools:layout="@layout/fragment_network_type_change_detector">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/VisibilityObserverWithListFragment"
+        android:name="com.example.sdk.sample.visibilityobserver.VisibilityObserverWithListFragment"
+        android:label="@string/visibility_observer_with_list_fragment_label"
+        tools:layout="@layout/fragment_visibility_observer_with_list">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/VisibilityObserverWithScrollViewBothDirectionFragment"
+        android:name="com.example.sdk.sample.visibilityobserver.VisibilityObserverWithScrollViewBothDirection"
+        android:label="@string/visibility_observer_with_scroll_view_both_direction_fragment_label"
+        tools:layout="@layout/fragment_visibility_observer_with_scroll_view_both_direction">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/IoQueueFragment"
+        android:name="com.example.sdk.sample.executornodequeue.IoQueueFragment"
+        android:label="@string/io_queue_fragment_label"
+        tools:layout="@layout/fragment_io_queue">
+
+    </fragment>
+</navigation>

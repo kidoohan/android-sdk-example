@@ -1,4 +1,4 @@
-package com.example.sdk.internal.visibilitytracker
+package com.example.sdk.internal.visibilityobserver
 
 enum class VisibilityObserverState {
     WAITING_FOR_OBSERVE_API,
