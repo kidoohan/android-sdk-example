@@ -57,5 +57,8 @@ dependencies {
     implementation(libs.androidx.fragment.testing)
     implementation(libs.androidx.test.espresso.idlingResource)
 
+    implementation(projects.sdkTestdata)
+    implementation(projects.sdkTestutils)
+
     androidTestImplementation(libs.bundles.test.android)
 }

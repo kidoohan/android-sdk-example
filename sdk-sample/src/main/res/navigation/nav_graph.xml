@@ -34,6 +34,10 @@
         <action
             android:id="@+id/action_SampleListFragment_to_IoQueueFragment"
             app:destination="@+id/IoQueueFragment" />
+
+        <action
+            android:id="@+id/action_SampleListFragment_to_MraidFragment"
+            app:destination="@+id/MraidFragment" />
     </fragment>
 
     <fragment
@@ -81,6 +85,14 @@
         android:name="com.example.sdk.sample.executornodequeue.IoQueueFragment"
         android:label="@string/io_queue_fragment_label"
         tools:layout="@layout/fragment_io_queue">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/MraidFragment"
+        android:name="com.example.sdk.sample.mraid.MraidFragment"
+        android:label="@string/mraid_fragment_label"
+        tools:layout="@layout/fragment_mraid">
 
     </fragment>
 </navigation>

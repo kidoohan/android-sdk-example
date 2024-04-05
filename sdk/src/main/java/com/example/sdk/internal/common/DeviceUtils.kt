@@ -1,21 +1,24 @@
 package com.example.sdk.internal.common
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.content.res.Resources
 import android.net.ConnectivityManager
 import android.os.Build
 import android.telephony.TelephonyManager
 import android.util.DisplayMetrics
+import android.view.Surface
 import android.view.WindowManager
 import java.util.Locale
 
 object DeviceUtils {
-    private val LOG_TAG = DeviceUtils::class.java.simpleName
-
     /**
      * Check whether the application is running in an emulator.
      *
@@ -103,6 +106,15 @@ object DeviceUtils {
         return context.getSystemService(Context.WINDOW_SERVICE) as? WindowManager
     }
 
+    @Suppress("DEPRECATION", "kotlin:S1874")
+    @SuppressLint("QueryPermissionsNeeded")
+    @JvmStatic
+    fun canHandleIntent(context: Context, intent: Intent): Boolean {
+        return runCatching {
+            context.packageManager.queryIntentActivities(intent, 0).isNotEmpty()
+        }.getOrDefault(false)
+    }
+
     fun getDisplayMetrics(context: Context): DisplayMetrics {
         return getResources(context).displayMetrics
     }
@@ -168,6 +180,60 @@ object DeviceUtils {
             packageManager.getInstallSourceInfo(packageName).installingPackageName
         } else {
             packageManager.getInstallerPackageName(packageName)
+        }
+    }
+
+    @JvmStatic
+    fun getRequestedOrientation(context: Context): Int? {
+        return if (context is Activity) {
+            context.requestedOrientation
+        } else {
+            null
+        }
+    }
+
+    @JvmStatic
+    fun setRequestedOrientation(context: Context, activityOrientation: Int) {
+        if (context is Activity) {
+            context.requestedOrientation = activityOrientation
+        }
+    }
+
+    @JvmStatic
+    fun getActivityInfoOrientation(context: Context): Int? {
+        return getRotation(context)?.let { rotation ->
+            val resources = getResources(context)
+            when (resources.configuration.orientation) {
+                Configuration.ORIENTATION_PORTRAIT -> {
+                    when (rotation) {
+                        Surface.ROTATION_90,
+                        Surface.ROTATION_180,
+                        -> ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
+                        else -> ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    }
+                }
+                Configuration.ORIENTATION_LANDSCAPE -> {
+                    when (rotation) {
+                        Surface.ROTATION_180,
+                        Surface.ROTATION_270,
+                        -> ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE
+                        else -> ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+                    }
+                }
+                else -> null
+            }
+        }
+    }
+
+    @Suppress("DEPRECATION", "kotlin:S1874")
+    @JvmStatic
+    fun getRotation(context: Context): Int? {
+        return (context as? Activity)?.let { activity ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                activity.display?.rotation
+            } else {
+                activity.windowManager.defaultDisplay.rotation
+            }
         }
     }
 }

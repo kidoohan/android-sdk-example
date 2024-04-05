@@ -250,26 +250,31 @@ class VisibilityObserver(
         var intersectingRect: Rect? = null
         var intersectingRatio = 0.0
         var intersectingPx = 0
+        var attached = false
 
-        if (isAttachedToWindow && isShown && !isInBackground && width > 0 && height > 0) {
-            val visibleRect = Rect()
-            if (getGlobalVisibleRect(visibleRect)) {
-                val visibleWidth = visibleRect.width()
-                val visibleHeight = visibleRect.height()
+        if (isAttachedToWindow && isShown && !isInBackground) {
+            attached = true
+            if (width > 0 && height > 0) {
+                val visibleRect = Rect()
+                if (getGlobalVisibleRect(visibleRect)) {
+                    val visibleWidth = visibleRect.width()
+                    val visibleHeight = visibleRect.height()
 
-                val visibleArea = visibleWidth * visibleHeight
-                val totalArea = width * height
+                    val visibleArea = visibleWidth * visibleHeight
+                    val totalArea = width * height
 
-                intersectingRect = visibleRect
-                intersectingRatio =
-                    0.0.coerceAtLeast(visibleArea / totalArea.toDouble())
-                intersectingPx = 0.coerceAtLeast(visibleArea)
+                    intersectingRect = visibleRect
+                    intersectingRatio =
+                        0.0.coerceAtLeast(visibleArea / totalArea.toDouble())
+                    intersectingPx = 0.coerceAtLeast(visibleArea)
+                }
             }
         }
         return VisibilityObserverEntry(
             intersectingRect,
             intersectingRatio,
             intersectingPx,
+            attached,
             isInBackground,
         )
     }

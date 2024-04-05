@@ -17,6 +17,7 @@
 
         <activity
             android:name=".MainActivity"
+            android:configChanges="orientation|screenLayout|screenSize|keyboardHidden|smallestScreenSize"
             android:exported="true"
             android:theme="@style/Theme.Sdkexample.NoActionBar">
             <intent-filter>

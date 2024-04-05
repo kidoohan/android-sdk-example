@@ -16,6 +16,7 @@ protected constructor(
         0.0,
         0,
         false,
+        false,
     )
 
     internal fun check(entry: VisibilityObserverEntry) {
@@ -42,6 +43,7 @@ protected constructor(
             null,
             0.0,
             0,
+            false,
             false,
         )
     }

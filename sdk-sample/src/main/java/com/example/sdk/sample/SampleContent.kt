@@ -1,7 +1,12 @@
 package com.example.sdk.sample
 
 import android.os.Bundle
+import com.example.sdk.internal.webview.mraid.MraidPlacementType
 import com.example.sdk.sample.image.ARG_IMAGE_TRANSFORMATION_TYPE
+import com.example.sdk.sample.mraid.ARG_AD_WEB_VIEW_SIZE_HEIGHT
+import com.example.sdk.sample.mraid.ARG_AD_WEB_VIEW_SIZE_WIDTH
+import com.example.sdk.sample.mraid.ARG_HTML_FILE_NAME
+import com.example.sdk.sample.mraid.ARG_IS_INLINE_PLACEMENT_TYPE
 
 object SampleContent {
     val SAMPLES = listOf(
@@ -42,6 +47,30 @@ object SampleContent {
         // region ExecutorNodeQueue Samples
         SectionItem("ExecutorNodeQueue Samples"),
         ContentItem("IO_QUEUE", SampleType.IoQueue),
+        // endregion
+
+        // region
+        SectionItem("MRAID Samples"),
+        ContentItem(
+            "Default",
+            SampleType.Mraid(MraidType.DEFAULT),
+        ),
+        ContentItem(
+            "Resize",
+            SampleType.Mraid(MraidType.RESIZE),
+        ),
+        ContentItem(
+            "Resize Error",
+            SampleType.Mraid(MraidType.RESIZE_ERROR),
+        ),
+        ContentItem(
+            "Expand",
+            SampleType.Mraid(MraidType.EXPAND),
+        ),
+        ContentItem(
+            "Expand Two Part",
+            SampleType.Mraid(MraidType.EXPAND_TWO_PART),
+        ),
         // endregion
     )
 
@@ -88,6 +117,10 @@ object SampleContent {
             R.id.action_SampleListFragment_to_IoQueueFragment,
             Bundle(),
         )
+
+        data class Mraid(
+            val mraidType: MraidType,
+        ) : SampleType(R.id.action_SampleListFragment_to_MraidFragment, mraidType.toBundle())
     }
 
     enum class ImageTransformationType(val key: Int) {
@@ -109,6 +142,41 @@ object SampleContent {
                 return values().find {
                     it.key == key
                 }
+            }
+        }
+    }
+
+    enum class MraidType(
+        private val placementType: MraidPlacementType,
+        private val adWebViewWidth: Int,
+        private val adWebViewHeight: Int,
+        private val onePartHtmlFileName: String,
+    ) {
+        DEFAULT(MraidPlacementType.INLINE, 300, 150, "mraid/mraid_default.txt"),
+        RESIZE(MraidPlacementType.INLINE, 320, 50, "mraid/mraid_resize.txt"),
+        RESIZE_ERROR(MraidPlacementType.INLINE, -1, -1, "mraid/mraid_resize_err.txt"),
+        EXPAND(MraidPlacementType.INLINE, 250, 60, "mraid/mraid_expand.txt"),
+        EXPAND_TWO_PART(MraidPlacementType.INLINE, 320, 50, "mraid/mraid_twopart_expand_part1.txt"),
+        ;
+
+        fun toBundle(): Bundle {
+            return Bundle().apply {
+                putBoolean(
+                    ARG_IS_INLINE_PLACEMENT_TYPE,
+                    placementType == MraidPlacementType.INLINE,
+                )
+                putInt(
+                    ARG_AD_WEB_VIEW_SIZE_WIDTH,
+                    adWebViewWidth,
+                )
+                putInt(
+                    ARG_AD_WEB_VIEW_SIZE_HEIGHT,
+                    adWebViewHeight,
+                )
+                putString(
+                    ARG_HTML_FILE_NAME,
+                    onePartHtmlFileName,
+                )
             }
         }
     }

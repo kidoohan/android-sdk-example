@@ -13,6 +13,7 @@ import com.example.sdk.internal.inspector.crashevent.CrashEventCall
 import com.example.sdk.internal.inspector.crashevent.getStringCause
 import com.example.sdk.internal.inspector.crashevent.getStringStackTrace
 import com.example.sdk.internal.inspector.crashevent.isSdkRelated
+import com.example.sdk.internal.inspector.deviceevent.AudioVolumeChangeEventCrawler
 import com.example.sdk.internal.inspector.deviceevent.SystemEventsCrawler
 import com.example.sdk.internal.inspector.lifecycleevent.ActivityLifecycleCrawler
 import com.example.sdk.internal.inspector.lifecycleevent.FragmentLifecycleCrawler
@@ -58,6 +59,7 @@ object InspectorManager {
             }
             eventCrawlers.add(CrashCrawler())
             eventCrawlers.add(SystemEventsCrawler(context))
+            eventCrawlers.add(AudioVolumeChangeEventCrawler(context))
 
             for (eventCrawler in eventCrawlers) {
                 eventCrawler.register(eventHub)
@@ -129,5 +131,15 @@ object InspectorManager {
 
     private fun <T : EventCrawler> getEventCrawler(clazz: Class<T>): T? {
         return eventCrawlers.filterIsInstance(clazz).getOrNull(0)
+    }
+
+    @JvmStatic
+    internal fun getSystemEventsCrawler(): SystemEventsCrawler? {
+        return getEventCrawler(SystemEventsCrawler::class.java)
+    }
+
+    @JvmStatic
+    fun getAudioVolumeChangeEventCrawler(): AudioVolumeChangeEventCrawler? {
+        return getEventCrawler(AudioVolumeChangeEventCrawler::class.java)
     }
 }
