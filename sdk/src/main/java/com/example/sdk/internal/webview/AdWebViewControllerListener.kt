@@ -20,14 +20,4 @@ interface AdWebViewControllerListener {
     fun onAdUnloaded() {
         // do nothing
     }
-
-    /** Called when an ad is muted by ad choices. */
-    fun onAdMuted() {
-        // do nothing
-    }
-
-    /** Called when the meta data of an ad changes. */
-    fun onAdMetaChanged(params: Map<String, String>) {
-        // do nothing
-    }
 }
