@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.fragment.app.Fragment
 import com.example.sdk.internal.Validate
-import com.example.sdk.internal.common.TaskUtils
+import com.example.sdk.internal.concurrent.tasks.Tasks
 import com.example.sdk.sample.databinding.FragmentIoQueueBinding
 import java.util.Random
 import java.util.concurrent.atomic.AtomicInteger
@@ -40,10 +40,10 @@ class IoQueueFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         repeat(REPEAT_COUNT) {
-            TaskUtils.callInBackgroundThread {
+            Tasks.callInBackgroundThread {
                 requireActivity().runOnUiThread {
                     _binding?.runningTask?.text =
-                        "Running deferred count ${runningTask.incrementAndGet()}"
+                        "Running task count ${runningTask.incrementAndGet()}"
                     Validate.checkLessThanOrEqualTo(runningTask.get(), 64)
                 }
 

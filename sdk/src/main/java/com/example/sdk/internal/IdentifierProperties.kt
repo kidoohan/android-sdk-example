@@ -10,12 +10,11 @@ import android.os.IInterface
 import android.os.Parcel
 import android.os.RemoteException
 import com.example.sdk.internal.common.ReflectionUtils
-import com.example.sdk.internal.common.TaskUtils
+import com.example.sdk.internal.concurrent.tasks.Task
+import com.example.sdk.internal.concurrent.tasks.Tasks
 import com.google.android.gms.appset.AppSet
 import com.google.android.gms.appset.AppSetIdClient
 import com.google.android.gms.appset.AppSetIdInfo
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 import java.util.concurrent.BlockingQueue
 import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
@@ -115,12 +114,15 @@ class IdentifierProperties private constructor(
 
         @JvmStatic
         fun getIdentifierProperties(context: Context): Task<IdentifierProperties> {
-            return cachedIdentifierProperties?.takeIf {
+            val identifierProperties = cachedIdentifierProperties?.takeIf {
                 System.currentTimeMillis() - it.fetchTime < REFRESH_INTERVAL_MILLIS
-            }?.run {
-                Tasks.forResult(cachedIdentifierProperties)
-            } ?: TaskUtils.callInBackgroundThread {
-                cacheAndReturnIdentifierProperties(internalGetIdentifierProperties(context))
+            }
+            return if (identifierProperties != null) {
+                Tasks.forResult(identifierProperties)
+            } else {
+                Tasks.callInBackgroundThread {
+                    cacheAndReturnIdentifierProperties(internalGetIdentifierProperties(context))
+                }
             }
         }
 
@@ -203,9 +205,9 @@ class IdentifierProperties private constructor(
             return if (ReflectionUtils.isClassAvailable("com.google.android.gms.appset.AppSet")) {
                 try {
                     val appSetIdClient: AppSetIdClient = AppSet.getClient(context)
-                    val task: Task<AppSetIdInfo> = appSetIdClient.appSetIdInfo
+                    val task: com.google.android.gms.tasks.Task<AppSetIdInfo> = appSetIdClient.appSetIdInfo
                     val appSetIdInfo =
-                        Tasks.await(task, ADVERTISING_ID_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+                        com.google.android.gms.tasks.Tasks.await(task, ADVERTISING_ID_TIMEOUT_SECONDS, TimeUnit.SECONDS)
                     appSetIdInfo.id
                 } catch (e: Exception) {
                     SdkLogger.w(LOG_TAG, "Failed to get AppSetId. ${e.message}")

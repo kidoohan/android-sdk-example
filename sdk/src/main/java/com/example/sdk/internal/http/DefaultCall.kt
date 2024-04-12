@@ -1,7 +1,7 @@
 package com.example.sdk.internal.http
 
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
 import com.example.sdk.internal.http.raw.HttpRequestProperties
-import com.google.android.gms.tasks.CancellationToken
 
 class DefaultCall(
     requestFactory: DefaultRequest.Factory,

@@ -1,6 +1,6 @@
 package com.example.sdk.internal.concurrent
 
-import com.google.android.gms.tasks.CancellationToken
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
 
 /**
  * Represents an item holding the properties of the [ExecutorNode].
@@ -12,6 +12,6 @@ open class ExecutorNodeItem(
 ) {
     /** Returns true if and only if this Cancellable has been successfully cancelled. */
     fun isCancellationRequest(): Boolean {
-        return cancellationToken?.isCancellationRequested ?: false
+        return cancellationToken?.isCancellationRequested() ?: false
     }
 }

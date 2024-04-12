@@ -5,13 +5,13 @@ import com.example.sdk.internal.IdentifierProperties
 import com.example.sdk.internal.Sdk
 import com.example.sdk.internal.common.json.JSONMarshallable
 import com.example.sdk.internal.concurrent.Executors
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
+import com.example.sdk.internal.concurrent.tasks.Task
 import com.example.sdk.internal.http.BaseRequest
 import com.example.sdk.internal.http.Request
 import com.example.sdk.internal.http.raw.HttpHeaders
 import com.example.sdk.internal.http.raw.HttpMethod
 import com.example.sdk.internal.http.raw.HttpRequestProperties
-import com.google.android.gms.tasks.CancellationToken
-import com.google.android.gms.tasks.Task
 import org.json.JSONObject
 
 internal class CrashEventRequest(
@@ -27,7 +27,7 @@ internal class CrashEventRequest(
     override val rawRequestProperties: Task<HttpRequestProperties> by lazy {
         Sdk.getIdentifierProperties().continueWith(Executors.IMMEDIATE_EXECUTOR) {
             val identifierProperties = if (it.isSuccessful) {
-                it.result
+                it.result ?: IdentifierProperties.EMPTY_IDENTIFIER_PROPERTIES
             } else {
                 IdentifierProperties.EMPTY_IDENTIFIER_PROPERTIES
             }

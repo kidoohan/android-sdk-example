@@ -1,6 +1,6 @@
 package com.example.sdk.internal.http
 
-import com.google.android.gms.tasks.CancellationToken
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
 
 /**
  * A base implementation of [Request]

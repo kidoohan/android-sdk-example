@@ -1,9 +1,9 @@
 package com.example.sdk.internal.http
 
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
+import com.example.sdk.internal.concurrent.tasks.Task
+import com.example.sdk.internal.concurrent.tasks.Tasks
 import com.example.sdk.internal.http.raw.HttpRequestProperties
-import com.google.android.gms.tasks.CancellationToken
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 
 /**
  * A default implementation of [BaseRequest].

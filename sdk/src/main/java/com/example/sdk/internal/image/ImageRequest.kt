@@ -3,9 +3,9 @@ package com.example.sdk.internal.image
 import android.net.Uri
 import android.os.Bundle
 import com.example.sdk.internal.concurrent.ExecutorNodeItem
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
 import com.example.sdk.internal.image.transform.Transformation
 import com.example.sdk.internal.inspector.MapSerializable
-import com.google.android.gms.tasks.CancellationToken
 
 /**
  * An value that represents a request for an image.

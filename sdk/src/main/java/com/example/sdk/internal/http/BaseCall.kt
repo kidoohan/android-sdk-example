@@ -4,15 +4,14 @@ import androidx.annotation.UiThread
 import androidx.annotation.WorkerThread
 import com.example.sdk.internal.Validate
 import com.example.sdk.internal.common.ExceptionUtils
-import com.example.sdk.internal.common.TaskUtils
 import com.example.sdk.internal.concurrent.Executors
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
+import com.example.sdk.internal.concurrent.tasks.RuntimeExecutionException
+import com.example.sdk.internal.concurrent.tasks.Task
+import com.example.sdk.internal.concurrent.tasks.Tasks
 import com.example.sdk.internal.http.raw.HttpRequest
 import com.example.sdk.internal.http.raw.HttpResponse
 import com.example.sdk.internal.http.raw.execute
-import com.google.android.gms.tasks.CancellationToken
-import com.google.android.gms.tasks.RuntimeExecutionException
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 import java.util.concurrent.atomic.AtomicBoolean
 import kotlin.jvm.Throws
 
@@ -53,7 +52,7 @@ abstract class BaseCall<TResponse>(
     }
 
     override fun isCancellationRequested(): Boolean {
-        return cancellationToken?.isCancellationRequested ?: false
+        return cancellationToken?.isCancellationRequested() ?: false
     }
 
     @WorkerThread
@@ -63,7 +62,7 @@ abstract class BaseCall<TResponse>(
 
     @UiThread
     override fun enqueue(callback: Call.Callback<TResponse>) {
-        TaskUtils.callInBackgroundThread {
+        Tasks.callInBackgroundThread {
             internalExecute { rawRequest ->
                 callback.onStart(rawRequest)
             }

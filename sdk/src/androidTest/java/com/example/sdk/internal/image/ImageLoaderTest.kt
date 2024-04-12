@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.sdk.internal.common.TaskUtils
 import com.example.sdk.internal.image.ImageLoader.enqueue
 import com.example.sdk.internal.image.ImageLoader.execute
 import com.example.sdk.testutils.TestUtils

@@ -1,7 +1,7 @@
 package com.example.sdk.internal.http.raw
 
 import com.example.sdk.internal.concurrent.ExecutorNodeItem
-import com.google.android.gms.tasks.CancellationToken
+import com.example.sdk.internal.concurrent.tasks.CancellationToken
 
 /**
  * An HTTP request.

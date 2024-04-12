@@ -152,10 +152,10 @@ object Executors {
 
     class BackgroundExecutor : Executor {
         override fun execute(command: Runnable) {
-            val deferredQueue = ExecutorNodeQueue.IO_QUEUE
-            deferredQueue.enqueue(
+            val executorNodeQueue = ExecutorNodeQueue.IO_QUEUE
+            executorNodeQueue.enqueue(
                 BackgroundExecutorNode(
-                    deferredQueue,
+                    executorNodeQueue,
                     command,
                 ),
             )

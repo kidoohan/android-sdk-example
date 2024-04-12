@@ -1,11 +1,11 @@
 package com.example.sdk.internal
 
 import android.content.Context
+import com.example.sdk.internal.concurrent.tasks.Task
+import com.example.sdk.internal.concurrent.tasks.Tasks
 import com.example.sdk.internal.inspector.EventBreadcrumb
 import com.example.sdk.internal.inspector.InspectorManager
 import com.example.sdk.internal.persistence.Flags
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
 import java.util.concurrent.atomic.AtomicBoolean
 
 object Sdk {
@@ -78,7 +78,7 @@ object Sdk {
             IdentifierProperties.getIdentifierProperties(applicationContext)
                 .addOnCompleteListener {
                     if (it.isSuccessful) {
-                        cachedIdentifierProperties = it.result
+                        cachedIdentifierProperties = it.result ?: IdentifierProperties.EMPTY_IDENTIFIER_PROPERTIES
                     }
                 }
         } else {

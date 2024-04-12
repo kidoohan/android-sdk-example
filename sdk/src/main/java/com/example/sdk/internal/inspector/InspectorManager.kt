@@ -5,8 +5,8 @@ import android.content.Context
 import com.example.sdk.internal.SdkLogger
 import com.example.sdk.internal.common.FileUtils
 import com.example.sdk.internal.common.ReflectionUtils
-import com.example.sdk.internal.common.TaskUtils
 import com.example.sdk.internal.concurrent.Executors
+import com.example.sdk.internal.concurrent.tasks.Tasks
 import com.example.sdk.internal.inspector.crashevent.CrashCrawler
 import com.example.sdk.internal.inspector.crashevent.CrashEvent
 import com.example.sdk.internal.inspector.crashevent.CrashEventCall
@@ -87,7 +87,7 @@ object InspectorManager {
             )
 
             val latch = CountDownLatch(1)
-            TaskUtils.callInBackgroundThread {
+            Tasks.callInBackgroundThread {
                 FileUtils.writeFile(crashEvent.fileName, crashEvent.toString())
             }.addOnSuccessListener { isSuccess ->
                 if (isSuccess) {
@@ -115,10 +115,10 @@ object InspectorManager {
 
     @JvmStatic
     internal fun reportCrashEvent(crashEvent: CrashEvent, latch: CountDownLatch? = null) {
-        TaskUtils.callInBackgroundThread {
+        Tasks.callInBackgroundThread {
             CrashEventCall.create(crashEvent).execute()
         }.addOnCompleteListener(Executors.IMMEDIATE_EXECUTOR) {
-            if (it.isSuccessful && it.result.rawResponse.isSuccessful()) {
+            if (it.isSuccessful && it.result?.rawResponse?.isSuccessful() == true) {
                 if (!FileUtils.deleteFile(crashEvent.fileName)) {
                     SdkLogger.w(LOG_TAG, "Failed to delete the error event file.")
                 }

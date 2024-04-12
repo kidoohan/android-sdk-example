@@ -1,7 +1,7 @@
 package com.example.sdk.internal.http
 
+import com.example.sdk.internal.concurrent.tasks.Task
 import com.example.sdk.internal.http.raw.HttpRequest
-import com.google.android.gms.tasks.Task
 
 interface Call<TResponse> {
     /** the rqw request. */
