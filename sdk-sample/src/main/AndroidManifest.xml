@@ -15,6 +15,14 @@
             android:name="com.example.sdk.APP_CODE"
             android:value="@string/app_code" />
 
+        <provider android:authorities="${applicationId}.SdkInitProvider"
+            android:name="com.example.sdk.SdkInitProvider" android:exported="false" tools:node="merge">
+
+            <meta-data android:name="com.example.sdk.sample.SampleInitializer"
+                android:value="com.example.sdk.sdkinitializer" />
+
+        </provider>
+
         <activity
             android:name=".MainActivity"
             android:configChanges="orientation|screenLayout|screenSize|keyboardHidden|smallestScreenSize"

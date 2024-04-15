@@ -55,10 +55,15 @@ object Sdk {
 
             val appCode = Flags.APP_CODE.getValue()
             val userId = Flags.USER_ID.getValue()
-
             addSdkBreadcrumb("onCreate", mapOf("appCode" to appCode, "userId" to userId))
 
-            // todo initialize sdk
+            // discover and initialize all SdkInitializer instances.
+            SdkInitializers.discoverAndInitialize(
+                applicationContext,
+                appCode,
+                userId,
+                InspectorManager.eventHub,
+            )
         }
     }
 
