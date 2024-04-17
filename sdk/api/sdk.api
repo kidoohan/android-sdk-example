@@ -13,3 +13,7 @@ public final class com/example/sdk/SdkInitProvider : android/content/ContentProv
 public final class com/example/sdk/SdkInitProvider$Companion {
 }
 
+public abstract interface class com/example/sdk/SdkInitializer {
+	public abstract fun create (Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;Lcom/example/sdk/internal/inspector/EventHub;)V
+}
+
